@@ -1,0 +1,43 @@
+{%extends "main.html"%}
+
+{% block body %}
+<h1>heu</h1>
+{% if page == 'login' %}
+<div>
+<form method="post" action="">
+
+    {% csrf_token %}
+    <label for="username">login</label>
+    <input type="text" name="username" placeholder="username" autocomplete="off">
+    <label for="password"> password: </label>
+    <input type="password" name="password" placeholder="password" autocomplete="off" ">
+
+    <button type="submit" name="login">login</button>
+</form>
+    <p>haven't signed up yet ?</p>
+    <a href="{% url 'register_user' %}">sign up</a>
+</div>
+
+{% else %}
+<div>
+    <form method="post" action="">
+
+        {% csrf_token %}
+       {{form.as_p}}
+
+    <button type=" submit" name="register">login</button>
+    </form>
+    <p>already signed up ?</p>
+    <a href="{% url 'user_login' %}">sign up</a>
+</div>
+
+{% endif %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
